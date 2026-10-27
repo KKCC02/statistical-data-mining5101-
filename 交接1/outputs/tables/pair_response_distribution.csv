@@ -1,0 +1,9 @@
+﻿comparison_type,n_responses,n_image_pairs
+between_cats,1,306
+between_cats,2,1162
+between_cats,3,2533
+between_cats,4,2916
+within_cat,1,116
+within_cat,2,351
+within_cat,3,475
+within_cat,4,190

@@ -1,0 +1,212 @@
+{
+  "passed": true,
+  "n_checks": 41,
+  "n_passed": 41,
+  "checks": [
+    {
+      "check": "reproducible_from_other_working_directory",
+      "passed": true,
+      "detail": "19 data/table/figure files compared; changed: []"
+    },
+    {
+      "check": "source_files_unchanged_by_rerun",
+      "passed": true,
+      "detail": "train.csv, test.csv, test_example.csv unchanged"
+    },
+    {
+      "check": "train_row_count_and_order",
+      "passed": true,
+      "detail": "24896 source rows; 24896 output rows"
+    },
+    {
+      "check": "train_original_cells_preserved",
+      "passed": true,
+      "detail": "0 unexplained differences; 0 whitespace normalizations"
+    },
+    {
+      "check": "train_canonical_image_pair",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "train_canonical_cat_pair",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "train_duplicate_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "train_human_missing_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "train_individual_missing_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "train_outcome_fields",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_row_count_and_order",
+      "passed": true,
+      "detail": "6224 source rows; 6224 output rows"
+    },
+    {
+      "check": "test_original_cells_preserved",
+      "passed": true,
+      "detail": "0 unexplained differences; 0 whitespace normalizations"
+    },
+    {
+      "check": "test_canonical_image_pair",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_canonical_cat_pair",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_duplicate_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_human_missing_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_individual_missing_flags",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "test_withheld_test_outcomes",
+      "passed": true,
+      "detail": "0 mismatched rows"
+    },
+    {
+      "check": "pair_summary_identity",
+      "passed": true,
+      "detail": "8049 unique source image pairs"
+    },
+    {
+      "check": "all_pair_summary_counts_and_proportions",
+      "passed": true,
+      "detail": "Recomputed directly from source choices, not derived choice codes"
+    },
+    {
+      "check": "category_counts_and_denominators",
+      "passed": true,
+      "detail": "Each field sums to all training responses; missing included"
+    },
+    {
+      "check": "missingness_table",
+      "passed": true,
+      "detail": "Original training fields checked"
+    },
+    {
+      "check": "choice_by_type_table",
+      "passed": true,
+      "detail": "A/B numerators and comparison-type denominators verified"
+    },
+    {
+      "check": "cat_coverage_counts",
+      "passed": true,
+      "detail": "Between-cat: two cats per record; within-cat: one record per cat"
+    },
+    {
+      "check": "pair_response_distribution",
+      "passed": true,
+      "detail": "Distribution matches source pair groups"
+    },
+    {
+      "check": "split_record_coverage",
+      "passed": true,
+      "detail": "Every source training row appears exactly once"
+    },
+    {
+      "check": "split_pair_separation",
+      "passed": true,
+      "detail": "No unordered image pair crosses the saved split"
+    },
+    {
+      "check": "image_inventory_and_decoding",
+      "passed": true,
+      "detail": "1558 referenced images verified and fully decoded by preparation script"
+    },
+    {
+      "check": "image_hashes_current",
+      "passed": true,
+      "detail": "Inventory fingerprints match current image files"
+    },
+    {
+      "check": "all_dataset_summary_values",
+      "passed": true,
+      "detail": "Every dataset_summary.json entry recomputed or checked against the declared seed"
+    },
+    {
+      "check": "overview_matches_summary",
+      "passed": true,
+      "detail": "CSV overview and JSON agree"
+    },
+    {
+      "check": "source_hashes_current",
+      "passed": true,
+      "detail": "Source fingerprints match the preparation run"
+    },
+    {
+      "check": "script_hash_current",
+      "passed": true,
+      "detail": "Outputs were produced by the current preparation script"
+    },
+    {
+      "check": "figure_01_comparisons_and_choices",
+      "passed": true,
+      "detail": "3000 x 1200 PNG and PDF available"
+    },
+    {
+      "check": "figure_02_data_coverage",
+      "passed": true,
+      "detail": "3000 x 1200 PNG and PDF available"
+    },
+    {
+      "check": "figure_03_human_information",
+      "passed": true,
+      "detail": "3000 x 1200 PNG and PDF available"
+    },
+    {
+      "check": "four_order_choice_combinations",
+      "passed": true,
+      "detail": "A/B choices tested with both image orientations"
+    },
+    {
+      "check": "blank_unknown_and_partial_missing",
+      "passed": true,
+      "detail": "Blank normalized; unknown preserved; partial missingness handled"
+    },
+    {
+      "check": "reject_invalid_choice",
+      "passed": true,
+      "detail": "Must stop rather than silently alter/drop the record"
+    },
+    {
+      "check": "reject_invalid_category",
+      "passed": true,
+      "detail": "Must stop rather than silently alter/drop the record"
+    },
+    {
+      "check": "reject_inconsistent_type",
+      "passed": true,
+      "detail": "Must stop rather than silently alter/drop the record"
+    }
+  ]
+}

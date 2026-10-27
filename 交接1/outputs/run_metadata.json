@@ -1,0 +1,18 @@
+{
+  "versions": {
+    "python": "3.11.8",
+    "pandas": "2.2.3",
+    "numpy": "2.2.5",
+    "matplotlib": "3.10.1",
+    "Pillow": "11.2.1"
+  },
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+  "runtime_seconds": 8.41,
+  "seed": 2026,
+  "source_sha256": {
+    "train.csv": "36bae3173cd867124b8c514a8abfb87b4d9303facbfc8fdeef0ea7cfbb0622d8",
+    "test.csv": "d8f6e9f8790ba722112c4620c0f60490e5354b8af3c2d1592ac204bb9a5c3534"
+  },
+  "script_sha256": "e53efca08dfa4708104aaf356db4ab29a24e611fb8e9f3e727337e50348e7e25"
+}

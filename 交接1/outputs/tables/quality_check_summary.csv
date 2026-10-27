@@ -1,0 +1,77 @@
+﻿dataset,check,count,action
+train,trimmed_or_blank_normalized_cells,0,normalize whitespace; blanks become missing
+train,missing_row_id,0,fail if present
+train,duplicate_row_id,0,fail if present
+train,missing_a_cat,0,fail if present
+train,missing_b_cat,0,fail if present
+train,missing_a_image,0,fail if present
+train,missing_b_image,0,fail if present
+train,missing_comparison_type,0,fail if present
+train,invalid_choice,0,fail if present
+train,invalid_comparison_type,0,fail if present
+train,invalid_gender,0,fail if present
+train,invalid_pet_history,0,fail if present
+train,invalid_pet_care,0,fail if present
+train,invalid_pet_contact,0,fail if present
+train,invalid_future_pet,0,fail if present
+train,invalid_mbti_ie,0,fail if present
+train,missing_choice,0,fail if present
+train,comparison_type_mismatch,0,fail if present
+train,same_image,0,fail if present
+train,a_invalid_cat_id,0,fail if present
+train,a_invalid_image_path,0,fail if present
+train,a_path_cat_mismatch,0,fail if present
+train,a_filename_cat_mismatch,0,fail if present
+train,b_invalid_cat_id,0,fail if present
+train,b_invalid_image_path,0,fail if present
+train,b_path_cat_mismatch,0,fail if present
+train,b_filename_cat_mismatch,0,fail if present
+train,missing_unique_image_files,0,fail if present
+train,extra_content_duplicate_rows,46,retain; identity of respondents is unavailable
+train,rows_in_content_duplicate_groups,92,retain; includes the first row in each group
+train,missing_gender,508,retain and flag; no imputation
+train,missing_pet_history,508,retain and flag; no imputation
+train,missing_pet_care,508,retain and flag; no imputation
+train,missing_pet_contact,508,retain and flag; no imputation
+train,missing_future_pet,508,retain and flag; no imputation
+train,missing_mbti_ie,508,retain and flag; no imputation
+train,all_human_fields_missing,508,retain and flag
+train,partially_missing_human_fields,0,retain and flag
+test,trimmed_or_blank_normalized_cells,0,normalize whitespace; blanks become missing
+test,missing_row_id,0,fail if present
+test,duplicate_row_id,0,fail if present
+test,missing_a_cat,0,fail if present
+test,missing_b_cat,0,fail if present
+test,missing_a_image,0,fail if present
+test,missing_b_image,0,fail if present
+test,missing_comparison_type,0,fail if present
+test,invalid_choice,0,fail if present
+test,invalid_comparison_type,0,fail if present
+test,invalid_gender,0,fail if present
+test,invalid_pet_history,0,fail if present
+test,invalid_pet_care,0,fail if present
+test,invalid_pet_contact,0,fail if present
+test,invalid_future_pet,0,fail if present
+test,invalid_mbti_ie,0,fail if present
+test,unexpected_test_outcomes,0,fail if present; test outcomes must remain withheld
+test,comparison_type_mismatch,0,fail if present
+test,same_image,0,fail if present
+test,a_invalid_cat_id,0,fail if present
+test,a_invalid_image_path,0,fail if present
+test,a_path_cat_mismatch,0,fail if present
+test,a_filename_cat_mismatch,0,fail if present
+test,b_invalid_cat_id,0,fail if present
+test,b_invalid_image_path,0,fail if present
+test,b_path_cat_mismatch,0,fail if present
+test,b_filename_cat_mismatch,0,fail if present
+test,missing_unique_image_files,0,fail if present
+test,extra_content_duplicate_rows,29,retain; identity of respondents is unavailable
+test,rows_in_content_duplicate_groups,58,retain; includes the first row in each group
+test,missing_gender,130,retain and flag; no imputation
+test,missing_pet_history,130,retain and flag; no imputation
+test,missing_pet_care,130,retain and flag; no imputation
+test,missing_pet_contact,130,retain and flag; no imputation
+test,missing_future_pet,130,retain and flag; no imputation
+test,missing_mbti_ie,130,retain and flag; no imputation
+test,all_human_fields_missing,130,retain and flag
+test,partially_missing_human_fields,0,retain and flag
