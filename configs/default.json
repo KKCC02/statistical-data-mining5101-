@@ -1,0 +1,21 @@
+{
+  "seed": 2026,
+  "paths": {
+    "raw": "data/raw",
+    "images": "data/raw/images",
+    "processed": "data/processed",
+    "splits": "data/splits",
+    "outputs": "outputs",
+    "reports": "reports"
+  },
+  "image_analysis": {
+    "permutations": 19999,
+    "conditional_permutations": 9999,
+    "bootstrap": 10000
+  },
+  "cat_ranking": {
+    "maxiter": 5000,
+    "gtol": 1e-8,
+    "ftol": 1e-12
+  }
+}

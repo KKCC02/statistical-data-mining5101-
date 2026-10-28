@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "baseline_commit": "b09be57b85bd6cd8d38a3b9dc6ba128990a396fb",
+  "checks": [
+    {
+      "check": "team_unit_and_source_tests",
+      "passed": true
+    },
+    {
+      "check": "shared_data_and_split_preserved",
+      "passed": true,
+      "files_checked": 4,
+      "differences": []
+    },
+    {
+      "check": "data_description_outputs_preserved",
+      "passed": true,
+      "files_checked": 15,
+      "differences": []
+    },
+    {
+      "check": "cat_ranking_unchanged",
+      "passed": true,
+      "max_abs_score_difference": 5.412337245047638e-14,
+      "same_cats_and_ranks": true
+    },
+    {
+      "check": "image_analysis_numbers_unchanged",
+      "passed": true
+    },
+    {
+      "check": "image_analysis_implementation_current",
+      "passed": true
+    },
+    {
+      "check": "image_analysis_sources_current",
+      "passed": true
+    },
+    {
+      "check": "cat_ranking_implementation_and_sources_current",
+      "passed": true
+    }
+  ],
+  "full_source_image_audit_rerun": false,
+  "limitation": "This check does not execute the full raw-image audit. Run source preparation/audit separately when course images are available."
+}

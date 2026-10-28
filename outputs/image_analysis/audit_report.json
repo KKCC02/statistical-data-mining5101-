@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "statistical_and_source_tests",
+      "passed": true,
+      "detail": "12 tests; 0 failures; 0 errors; 0 skipped"
+    },
+    {
+      "check": "input_fingerprints",
+      "passed": true,
+      "detail": "Clean data and saved split match run metadata"
+    },
+    {
+      "check": "analysis_script_current",
+      "passed": true,
+      "detail": "Analysis script matches saved run"
+    },
+    {
+      "check": "report_generator_current",
+      "passed": true,
+      "detail": "Report generator matches saved run"
+    },
+    {
+      "check": "shared_contract_current",
+      "passed": true,
+      "detail": "Shared data contract matches saved run"
+    },
+    {
+      "check": "configuration_current",
+      "passed": true,
+      "detail": "Configuration matches saved run"
+    },
+    {
+      "check": "01_pair_coverage_and_unanimity",
+      "passed": true,
+      "detail": "3450 x 1440 PNG, 300 dpi, PDF companion exists; PNGs visually reviewed"
+    },
+    {
+      "check": "02_agreement_and_pair_uncertainty",
+      "passed": true,
+      "detail": "3450 x 1470 PNG, 300 dpi, PDF companion exists; PNGs visually reviewed"
+    },
+    {
+      "check": "03_image_model_readiness",
+      "passed": true,
+      "detail": "3450 x 1470 PNG, 300 dpi, PDF companion exists; PNGs visually reviewed"
+    },
+    {
+      "check": "expected_tables",
+      "passed": true,
+      "detail": "Missing: []"
+    },
+    {
+      "check": "fresh_process_completed",
+      "passed": true,
+      "detail": "New interpreter and unrelated working directory; completed"
+    },
+    {
+      "check": "reproducible_outputs",
+      "passed": true,
+      "detail": "18 tables/simulations/figures/reports/summary files compared byte for byte; differences: []"
+    },
+    {
+      "check": "reproducible_report_sections",
+      "passed": true,
+      "detail": "3 report/handoff sections compared; differences: []"
+    },
+    {
+      "check": "upstream_unchanged",
+      "passed": true,
+      "detail": "All 27 shared-data and data/ranking output files unchanged by audit/rerun"
+    }
+  ],
+  "rerun": true,
+  "tests_run": 12,
+  "skipped_tests": 0
+}

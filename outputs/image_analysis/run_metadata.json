@@ -1,0 +1,26 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  },
+  "seed": 2026,
+  "source_sha256": {
+    "input": "ddcb943cca8265ba4b776d9d31245add6a7b7e225189eadef7c2f2d2b87e6522",
+    "split": "4cf171c1aa2db1c5e23f2c21a55c3bba9f236639d084f746b14d77036e296701"
+  },
+  "script_sha256": "01b9d2d65d251d82524d4009b18614f9c7b429e27390e692185cddf455012c2c",
+  "report_script_sha256": "c2d10d13f187bfe693c9838be02e77ed97898cb49db621dd189eb19828ef53ac",
+  "data_contract_sha256": "15091fc56be7ed8f8ea69012ddae96a3d92e8a1965d27ad6a990a78f45ffe370",
+  "config_sha256": "48c27366427f5ec01f149888e6a53c3b0a102bc0b7ed31558484e00d1d2661bb",
+  "runtime_seconds": 8.242,
+  "parameters": {
+    "permutations": 19999,
+    "conditional_permutations": 9999,
+    "bootstrap": 10000
+  }
+}

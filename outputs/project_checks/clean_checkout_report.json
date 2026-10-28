@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "command": "staged Git tree extracted to a temporary clean checkout; scripts/check_project.py run from unrelated cwd",
+  "unit_tests_run": 22,
+  "passed_tests": 21,
+  "skipped_tests": 1,
+  "skip_reason": "Optional original-CSV comparison: raw data intentionally absent from checkout",
+  "raw_data_and_cache_copied": false,
+  "editable_package_install_verified": true,
+  "notebook_code_cells_verified": true,
+  "all_6_cli_help_entries_verified": true,
+  "local_markdown_links_verified": true
+}

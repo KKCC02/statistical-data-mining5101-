@@ -1,0 +1,12 @@
+{
+  "strong_components": 1,
+  "converged": true,
+  "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+  "mean_negative_log_likelihood": 0.6436422705904978,
+  "max_abs_free_gradient": 9.019805606626655e-09,
+  "records": 21893,
+  "cats": 237,
+  "spearman_rho": 0.9730006866878612,
+  "top10_overlap": 10,
+  "analysis_scope": "all supplied between-cat training records; descriptive, not validation"
+}
