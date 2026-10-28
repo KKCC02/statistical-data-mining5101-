@@ -1,0 +1,2 @@
+# Keep generated result bytes and recorded script fingerprints stable on checkout.
+* -text

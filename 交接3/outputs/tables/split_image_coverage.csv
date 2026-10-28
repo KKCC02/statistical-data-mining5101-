@@ -1,0 +1,3 @@
+﻿training_scope,train_records,validation_records,train_images,validation_unique_images,validation_both_images_seen,validation_one_image_seen,validation_neither_image_seen,validation_both_cats_seen
+within_cat,2396,607,1140,416,300,238,69,607
+all_comparisons,19981,4915,1296,1206,4915,0,0,4915

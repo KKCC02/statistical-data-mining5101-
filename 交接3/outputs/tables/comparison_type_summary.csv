@@ -1,0 +1,3 @@
+﻿comparison_type,response_records,image_pairs,repeated_pairs,singleton_pairs,mixed_repeated_pairs,unanimous_repeated_pairs,mixed_repeated_fraction,response_dyads,agreeing_dyads,dyad_weighted_agreement,equal_pair_agreement,fair_coin_expected_unanimous
+between_cats,21893,6917,6611,306,4518,2093,0.683406443806,26257,14636,0.557413261226,0.552387435083,1578.75
+within_cat,3003,1132,1016,116,656,360,0.645669291339,2916,1547,0.530521262003,0.528871391076,318

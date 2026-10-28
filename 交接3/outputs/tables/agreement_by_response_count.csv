@@ -1,0 +1,9 @@
+﻿comparison_type,n_responses,n_pairs,n_unanimous,n_mixed,unanimous_fraction,fair_coin_unanimous_probability,dyad_weighted_agreement
+between_cats,1,306,306,0,1,1,
+between_cats,2,1162,620,542,0.533562822719,0.5,0.533562822719
+between_cats,3,2533,821,1712,0.324121594947,0.25,0.549414396631
+between_cats,4,2916,652,2264,0.223593964335,0.125,0.562471422039
+within_cat,1,116,116,0,1,1,
+within_cat,2,351,186,165,0.529914529915,0.5,0.529914529915
+within_cat,3,475,136,339,0.286315789474,0.25,0.524210526316
+within_cat,4,190,38,152,0.2,0.125,0.538596491228
