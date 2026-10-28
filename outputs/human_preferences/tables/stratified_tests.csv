@@ -1,0 +1,7 @@
+group_variable,test,statistic,df,p_value,informative_cat_pairs,n_records,groups,p_holm
+pet_history,cat-pair-stratified score chi-square,1.33934397179231,2,0.51187645294832,3917,21434,current;never;past,1.0
+pet_contact,cat-pair-stratified score chi-square,0.8500777919966527,4,0.9316111361885808,4196,21434,daily;never;often;rarely;sometimes,1.0
+pet_care,cat-pair-stratified score chi-square,4.503328539202148,3,0.21199358135045054,4145,21434,current_regular;never;occasionally;past_regular,1.0
+gender,cat-pair-stratified score chi-square,0.7583283228330928,1,0.383852176540724,3399,21434,man;woman,1.0
+future_pet,cat-pair-stratified score chi-square,0.6472706411665907,2,0.7235140449551261,2986,21434,no;unsure;yes,1.0
+mbti_ie,cat-pair-stratified score chi-square,4.589354007649921,2,0.1007939440695302,3575,21434,E;I;unknown,0.6047636644171812

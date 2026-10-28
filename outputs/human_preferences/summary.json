@@ -1,0 +1,433 @@
+{
+  "input_file": "/Users/shu/Documents/GitHub/statistical-data-mining5101-/data/processed/train_clean.csv",
+  "n_train_records": 24896,
+  "n_between_cat_responses": 21893,
+  "primary_variable": "pet_history",
+  "group_variables": [
+    "pet_history",
+    "pet_contact",
+    "pet_care",
+    "gender",
+    "future_pet",
+    "mbti_ie"
+  ],
+  "missingness": [
+    {
+      "group_variable": "pet_history",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    },
+    {
+      "group_variable": "pet_contact",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    },
+    {
+      "group_variable": "pet_care",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    },
+    {
+      "group_variable": "gender",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    },
+    {
+      "group_variable": "future_pet",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    },
+    {
+      "group_variable": "mbti_ie",
+      "n_missing": 508,
+      "n_total": 24896,
+      "n_between_cats": 21893,
+      "n_between_nonmissing": 21434
+    }
+  ],
+  "tests": [
+    {
+      "group_variable": "pet_history",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 1.33934397179231,
+      "df": 2,
+      "p_value": 0.51187645294832,
+      "informative_cat_pairs": 3917,
+      "n_records": 21434,
+      "groups": "current;never;past",
+      "p_holm": 1.0
+    },
+    {
+      "group_variable": "pet_contact",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 0.8500777919966527,
+      "df": 4,
+      "p_value": 0.9316111361885808,
+      "informative_cat_pairs": 4196,
+      "n_records": 21434,
+      "groups": "daily;never;often;rarely;sometimes",
+      "p_holm": 1.0
+    },
+    {
+      "group_variable": "pet_care",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 4.503328539202148,
+      "df": 3,
+      "p_value": 0.21199358135045054,
+      "informative_cat_pairs": 4145,
+      "n_records": 21434,
+      "groups": "current_regular;never;occasionally;past_regular",
+      "p_holm": 1.0
+    },
+    {
+      "group_variable": "gender",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 0.7583283228330928,
+      "df": 1,
+      "p_value": 0.383852176540724,
+      "informative_cat_pairs": 3399,
+      "n_records": 21434,
+      "groups": "man;woman",
+      "p_holm": 1.0
+    },
+    {
+      "group_variable": "future_pet",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 0.6472706411665907,
+      "df": 2,
+      "p_value": 0.7235140449551261,
+      "informative_cat_pairs": 2986,
+      "n_records": 21434,
+      "groups": "no;unsure;yes",
+      "p_holm": 1.0
+    },
+    {
+      "group_variable": "mbti_ie",
+      "test": "cat-pair-stratified score chi-square",
+      "statistic": 4.589354007649921,
+      "df": 2,
+      "p_value": 0.1007939440695302,
+      "informative_cat_pairs": 3575,
+      "n_records": 21434,
+      "groups": "E;I;unknown",
+      "p_holm": 0.6047636644171812
+    }
+  ],
+  "position_choices": [
+    {
+      "group_variable": "pet_history",
+      "group": "current",
+      "n_responses": 7512,
+      "choose_a": 3705,
+      "choose_b": 3807,
+      "proportion_choose_a": 0.4932108626198083,
+      "choose_a_ci95_low": 0.48191144862131663,
+      "choose_a_ci95_high": 0.5045172166773251
+    },
+    {
+      "group_variable": "pet_history",
+      "group": "never",
+      "n_responses": 8259,
+      "choose_a": 4385,
+      "choose_b": 3874,
+      "proportion_choose_a": 0.5309359486620656,
+      "choose_a_ci95_low": 0.5201613522699126,
+      "choose_a_ci95_high": 0.541681780331222
+    },
+    {
+      "group_variable": "pet_history",
+      "group": "past",
+      "n_responses": 5663,
+      "choose_a": 3010,
+      "choose_b": 2653,
+      "proportion_choose_a": 0.5315203955500618,
+      "choose_a_ci95_low": 0.5185068056308387,
+      "choose_a_ci95_high": 0.5444912511516241
+    },
+    {
+      "group_variable": "pet_contact",
+      "group": "daily",
+      "n_responses": 4441,
+      "choose_a": 2334,
+      "choose_b": 2107,
+      "proportion_choose_a": 0.5255573069128575,
+      "choose_a_ci95_low": 0.5108553437100362,
+      "choose_a_ci95_high": 0.540215094257897
+    },
+    {
+      "group_variable": "pet_contact",
+      "group": "never",
+      "n_responses": 924,
+      "choose_a": 477,
+      "choose_b": 447,
+      "proportion_choose_a": 0.5162337662337663,
+      "choose_a_ci95_low": 0.4840112130685259,
+      "choose_a_ci95_high": 0.5483218969847052
+    },
+    {
+      "group_variable": "pet_contact",
+      "group": "often",
+      "n_responses": 4306,
+      "choose_a": 2191,
+      "choose_b": 2115,
+      "proportion_choose_a": 0.5088248954946586,
+      "choose_a_ci95_low": 0.4938918401913441,
+      "choose_a_ci95_high": 0.5237422191415009
+    },
+    {
+      "group_variable": "pet_contact",
+      "group": "rarely",
+      "n_responses": 6688,
+      "choose_a": 3520,
+      "choose_b": 3168,
+      "proportion_choose_a": 0.5263157894736842,
+      "choose_a_ci95_low": 0.5143375956367413,
+      "choose_a_ci95_high": 0.5382637700958581
+    },
+    {
+      "group_variable": "pet_contact",
+      "group": "sometimes",
+      "n_responses": 5075,
+      "choose_a": 2578,
+      "choose_b": 2497,
+      "proportion_choose_a": 0.5079802955665025,
+      "choose_a_ci95_low": 0.4942249627826685,
+      "choose_a_ci95_high": 0.5217235563149938
+    },
+    {
+      "group_variable": "pet_care",
+      "group": "current_regular",
+      "n_responses": 3200,
+      "choose_a": 1654,
+      "choose_b": 1546,
+      "proportion_choose_a": 0.516875,
+      "choose_a_ci95_low": 0.4995512091741137,
+      "choose_a_ci95_high": 0.5341583240185037
+    },
+    {
+      "group_variable": "pet_care",
+      "group": "never",
+      "n_responses": 6207,
+      "choose_a": 3299,
+      "choose_b": 2908,
+      "proportion_choose_a": 0.5314966972772676,
+      "choose_a_ci95_low": 0.5190669809412927,
+      "choose_a_ci95_high": 0.5438874516573204
+    },
+    {
+      "group_variable": "pet_care",
+      "group": "occasionally",
+      "n_responses": 5759,
+      "choose_a": 2881,
+      "choose_b": 2878,
+      "proportion_choose_a": 0.500260461885744,
+      "choose_a_ci95_low": 0.4873510772298805,
+      "choose_a_ci95_high": 0.5131694992984582
+    },
+    {
+      "group_variable": "pet_care",
+      "group": "past_regular",
+      "n_responses": 6268,
+      "choose_a": 3266,
+      "choose_b": 3002,
+      "proportion_choose_a": 0.521059349074665,
+      "choose_a_ci95_low": 0.5086831267362271,
+      "choose_a_ci95_high": 0.5334097740064587
+    },
+    {
+      "group_variable": "gender",
+      "group": "man",
+      "n_responses": 12298,
+      "choose_a": 6330,
+      "choose_b": 5968,
+      "proportion_choose_a": 0.5147178402992356,
+      "choose_a_ci95_low": 0.505881533174025,
+      "choose_a_ci95_high": 0.5235449556335052
+    },
+    {
+      "group_variable": "gender",
+      "group": "woman",
+      "n_responses": 9136,
+      "choose_a": 4770,
+      "choose_b": 4366,
+      "proportion_choose_a": 0.5221103327495622,
+      "choose_a_ci95_low": 0.5118604751845947,
+      "choose_a_ci95_high": 0.5323416044488664
+    },
+    {
+      "group_variable": "future_pet",
+      "group": "no",
+      "n_responses": 2078,
+      "choose_a": 1000,
+      "choose_b": 1078,
+      "proportion_choose_a": 0.48123195380173245,
+      "choose_a_ci95_low": 0.4598036719125663,
+      "choose_a_ci95_high": 0.5027294980992439
+    },
+    {
+      "group_variable": "future_pet",
+      "group": "unsure",
+      "n_responses": 4314,
+      "choose_a": 2145,
+      "choose_b": 2169,
+      "proportion_choose_a": 0.4972183588317107,
+      "choose_a_ci95_low": 0.48230738659947237,
+      "choose_a_ci95_high": 0.5121342805555428
+    },
+    {
+      "group_variable": "future_pet",
+      "group": "yes",
+      "n_responses": 15042,
+      "choose_a": 7955,
+      "choose_b": 7087,
+      "proportion_choose_a": 0.5288525462039623,
+      "choose_a_ci95_low": 0.5208691683761864,
+      "choose_a_ci95_high": 0.5368211909417455
+    },
+    {
+      "group_variable": "mbti_ie",
+      "group": "E",
+      "n_responses": 5535,
+      "choose_a": 3040,
+      "choose_b": 2495,
+      "proportion_choose_a": 0.5492321589882565,
+      "choose_a_ci95_low": 0.536094296016908,
+      "choose_a_ci95_high": 0.5623017321149459
+    },
+    {
+      "group_variable": "mbti_ie",
+      "group": "I",
+      "n_responses": 12329,
+      "choose_a": 6147,
+      "choose_b": 6182,
+      "proportion_choose_a": 0.4985805823667775,
+      "choose_a_ci95_low": 0.48975663290886123,
+      "choose_a_ci95_high": 0.5074054160709407
+    },
+    {
+      "group_variable": "mbti_ie",
+      "group": "unknown",
+      "n_responses": 3570,
+      "choose_a": 1913,
+      "choose_b": 1657,
+      "proportion_choose_a": 0.5358543417366947,
+      "choose_a_ci95_low": 0.5194652595734909,
+      "choose_a_ci95_high": 0.5521663455074114
+    }
+  ],
+  "pet_history_group_bt_diagnostics": [
+    {
+      "group": "current",
+      "n_responses": 7512,
+      "identified": true,
+      "reason": "",
+      "strong_components": 1
+    },
+    {
+      "group": "never",
+      "n_responses": 8259,
+      "identified": true,
+      "reason": "",
+      "strong_components": 1
+    },
+    {
+      "group": "past",
+      "n_responses": 5663,
+      "identified": true,
+      "reason": "",
+      "strong_components": 1
+    }
+  ],
+  "field_audit": [
+    {
+      "field": "train_row_id",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 24896
+    },
+    {
+      "field": "a_cat",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 237
+    },
+    {
+      "field": "b_cat",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 237
+    },
+    {
+      "field": "a_image",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 1296
+    },
+    {
+      "field": "b_image",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 1296
+    },
+    {
+      "field": "choice",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 2
+    },
+    {
+      "field": "comparison_type",
+      "present": true,
+      "n_nonmissing": 24896,
+      "n_levels": 2
+    },
+    {
+      "field": "pet_history",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 3
+    },
+    {
+      "field": "pet_contact",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 5
+    },
+    {
+      "field": "pet_care",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 4
+    },
+    {
+      "field": "gender",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 2
+    },
+    {
+      "field": "future_pet",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 3
+    },
+    {
+      "field": "mbti_ie",
+      "present": true,
+      "n_nonmissing": 24388,
+      "n_levels": 3
+    }
+  ],
+  "participant_id_available": false,
+  "interpretation": "Rows are response records, not identified people. Group differences are descriptive associations."
+}

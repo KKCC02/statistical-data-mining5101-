@@ -1,9 +1,9 @@
-# 人群偏好差异 · 成员4接入约定
+# 人群偏好差异 · 成员4
 
-状态：尚未交付实际分析，`src/cat_arena/human_preferences/`仅预留模块边界。
+运行 `python scripts/run_human_preferences.py`，输入仅为 `data/processed/train_clean.csv`，结果写入 `outputs/human_preferences/`，章节写入 `reports/sections/human_preferences.md`。模块已接入 `scripts/run_all.py`。分析不读取验证集，也不将全数据统计用作验证特征。
 
-输入为`data/processed/train_clean.csv`，字段沿用成员1数据字典。优先`pet_history`，视证据考虑`pet_contact`/`pet_care`。使用逐行主表，不用缺少人群字段的图片对汇总代替。记录数不等于人数，缺失应明确排除或单列。
+主分析使用 `between_cats` 记录：分别检查 `pet_history`、`pet_contact`、`pet_care`、`gender`、`future_pet` 和 `mbti_ie`。输出包含缺失与字段审计、各组样本/猫/图片对覆盖、A 侧选择比例及 Wilson 区间、逐猫经验胜率/排名、排名相关和按无序猫对分层的群体关联检验。`pet_history` 三个分组比较图均强连通，因此另拟合分组 BT 分数作为探索性对比；这不是交互项检验或验证性能评估。`mbti_ie=unknown` 是有效类别。全体回答记录数不是参与者人数。
 
-实现放本模块，入口拟定`scripts/run_human_preferences.py`，结果写`outputs/human_preferences/`，报告写`reports/sections/human_preferences.md`。实现和验证之前不加入`run_all.py`。
+猫对分层 score 检验控制各组接触到的猫对差异，但假定记录层面的独立性；由于没有参与者 ID，统计量和 A/B 区间都不能校正同一参与者重复作答。结果仅为探索性关联，不作因果解释。按猫身份分组的胜率和排名是描述结果，不等同于交互模型推断。
 
-向成员5交付群体样本量、比较对象覆盖、群体偏好排名或条件选择差异、统计不确定性与候选交互项依据。只比总体A/B比例不能直接说明更喜欢哪些猫，应考虑比较对象构成。复用BT时重新检查各群体训练子集强连通性，不盲目对小群体拟合无正则模型。
+方法评估和建议见报告及 [成员5交接](human_preferences_handoff.md)。任何人群变量进入扩展模型前都须在训练折拟合，使用共同验证划分作评估；不得将全训练集排名、p 值或获胜派生字段当作验证特征。建议优先评估 `pet_history × cat`，但需先检查各子集比较图连通性，并采用有约束/正则化的交互模型。模块不替成员5决定最终模型。

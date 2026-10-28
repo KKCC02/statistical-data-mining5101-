@@ -1,0 +1,14 @@
+field,present,n_nonmissing,n_levels
+train_row_id,True,24896,24896
+a_cat,True,24896,237
+b_cat,True,24896,237
+a_image,True,24896,1296
+b_image,True,24896,1296
+choice,True,24896,2
+comparison_type,True,24896,2
+pet_history,True,24388,3
+pet_contact,True,24388,5
+pet_care,True,24388,4
+gender,True,24388,2
+future_pet,True,24388,3
+mbti_ie,True,24388,3

@@ -1,0 +1,7 @@
+group_variable,n_missing,n_total,n_between_cats,n_between_nonmissing
+pet_history,508,24896,21893,21434
+pet_contact,508,24896,21893,21434
+pet_care,508,24896,21893,21434
+gender,508,24896,21893,21434
+future_pet,508,24896,21893,21434
+mbti_ie,508,24896,21893,21434

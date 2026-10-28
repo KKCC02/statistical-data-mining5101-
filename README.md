@@ -13,7 +13,7 @@ python -m venv .venv
 .venv/Scripts/python scripts/check_project.py
 ```
 
-默认使用已有清洗数据，运行猫咪排名和图片分歧分析，无需图片、GPU或外部模型下载。核心依赖在`requirements.txt`，完整已验证环境在`requirements.lock.txt`。需要导入包的Notebook环境可额外执行`python -m pip install -e . --no-deps`。
+默认使用已有清洗数据，运行猫咪排名、图片分歧分析和人群偏好分析，无需图片、GPU或外部模型下载。核心依赖在`requirements.txt`，完整已验证环境在`requirements.lock.txt`。需要导入包的Notebook环境可额外执行`python -m pip install -e . --no-deps`。
 
 ## 模块与负责人
 
@@ -22,10 +22,10 @@ python -m venv .venv
 | 数据准备与总体探索 | 成员1 | `data_preparation/` | `run_data_preparation.py` | 已交付；完整重建需课程CSV和图片 |
 | 猫咪排名与BT基础模型 | 成员2 | `cat_ranking/` | `run_cat_ranking.py` | 已接入可复用拟合函数 |
 | 图片差异与偏好分歧 | 成员3 | `image_analysis/` | `run_image_analysis.py` | 已交付并完成迁移复现 |
-| 人群差异 | 成员4 | `human_preferences/` | 待实现 | 已预留接口与交付说明 |
+| 人群差异 | 成员4 | `human_preferences/` | `run_human_preferences.py` | 已交付；按人群比较猫咪经验胜率 |
 | 扩展模型与报告整合 | 成员5 | `model_comparison/` | 待实现 | 已预留接口与交付说明 |
 
-`run_all.py`默认运行已实现、可凭清洗数据执行的成员2/3模块，不代表成员4/5已完成。加`--prepare-data`会先重建并审计成员1数据，要求原始CSV及全部引用图片已放入`data/raw/`。
+`run_all.py`运行已实现、可凭清洗数据执行的成员2/3/4模块，不代表成员5已完成。加`--prepare-data`会先重建并审计成员1数据，要求原始CSV及全部引用图片已放入`data/raw/`。
 
 ## 目录与数据流
 
@@ -54,7 +54,7 @@ docs/provenance/            原环境记录与迁移基准
 - [数据字典](docs/modules/data_preparation/data_dictionary.md)与[数据准备](docs/modules/data_preparation/README_handoff.md)
 - [猫咪排名与可复用BT接口](docs/modules/cat_ranking.md)
 - [图片差异分析](docs/modules/image_analysis/README.md)
-- [人群差异接入](docs/modules/human_preferences.md)与[模型比较接入](docs/modules/model_comparison.md)
+- [人群差异说明](docs/modules/human_preferences.md)、[成员5人群交接](docs/modules/human_preferences_handoff.md)与[模型比较接入](docs/modules/model_comparison.md)
 - [成员贡献](docs/contributions.md)与[迁移验证](docs/migration.md)
 
 ## 数据与推断边界

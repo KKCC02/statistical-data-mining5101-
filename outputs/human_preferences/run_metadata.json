@@ -1,0 +1,6 @@
+{
+  "input_sha256": "ddcb943cca8265ba4b776d9d31245add6a7b7e225189eadef7c2f2d2b87e6522",
+  "primary_source": "data/processed/train_clean.csv",
+  "validation_data_used": false,
+  "implementation_sha256": "e8853a043285252615d08635e214c491dbb735b342163f8068e3bd49fa9d7fe8"
+}
