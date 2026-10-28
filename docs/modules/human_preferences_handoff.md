@@ -13,11 +13,14 @@
 ## 可复用文件
 
 - `outputs/human_preferences/tables/position_choices.csv`：各人群组 A/B 选择计数、A 侧比例和 Wilson 区间。
+- `outputs/human_preferences/tables/group_category_distribution.csv`：各群体类别样本量和占比，含缺失类别。
+- `outputs/human_preferences/tables/pet_history_cat_group_differences.csv`：同一猫咪在共同对手猫对中的 pet-history 组间标准化选择率差异及近似区间。
 - `outputs/human_preferences/tables/pet_history_group_bt_scores.csv`、`pet_history_group_bt_diagnostics.csv`：pet_history 各组基础 BT 分数和可识别性诊断。
 - `outputs/human_preferences/tables/group_coverage.csv`、`missingness.csv`、`field_audit.csv`：样本量、类别覆盖、缺失与必要字段检查。
 - `outputs/human_preferences/tables/cat_rankings_by_group.csv`、`rank_comparisons.csv`：各组猫咪经验胜率排序和排序相似度。
 - `outputs/human_preferences/tables/stratified_tests.csv`：猫对分层 score 检验及 Holm 校正。
 - `outputs/human_preferences/figures/group_cat_rankings.png`（另有 PDF）及 `reports/sections/human_preferences.md`：图和完整解释。
+- `group_sample_and_category_distribution.png`、`group_ab_choice_intervals.png`、`pet_history_cat_choice_rates.png`、`pet_history_group_preference_differences.png`（均有 PDF 版）：群体样本/类别、A/B 比例区间、猫咪选择率区间和共同猫对标准化差异图。
 
 ## 后续模型建议
 

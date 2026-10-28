@@ -91,6 +91,26 @@ For each group, cats are ranked by empirical win rate over between-cat response 
 | mbti_ie | E | unknown | 237 | 0.499 | 3/10 |
 | mbti_ie | I | unknown | 237 | 0.626 | 3/10 |
 
+## Sample size and category distribution
+
+![Group sample size and category distribution](../../outputs/human_preferences/figures/group_sample_and_category_distribution.png)
+
+Counts and shares, with missing values shown separately, are in `outputs/human_preferences/tables/group_category_distribution.csv`.
+
+![A/B choice proportions with Wilson intervals](../../outputs/human_preferences/figures/group_ab_choice_intervals.png)
+
+The displayed A/B intervals are descriptive record-level Wilson intervals; they do not account for participant clustering.
+
+## Cat-specific choices and group contrasts
+
+![Pet-history cat win rates](../../outputs/human_preferences/figures/pet_history_cat_choice_rates.png)
+
+The plot shows each pet-history group’s empirical win rate for the union of that group’s top five cats, with record-level Wilson intervals. Exact cat/group counts are in `cat_rankings_by_group.csv`.
+
+![Pet-history group differences in cat choice](../../outputs/human_preferences/figures/pet_history_group_preference_differences.png)
+
+The contrast plot compares pet-history groups on shared unordered cat-pair strata, weighted by pooled response records. It shows exploratory risk differences and approximate intervals, not a fitted interaction model; participant-level dependence remains unadjusted.
+
 ## Statistical tests
 
 A cat-pair-stratified score chi-square test checks whether the probability of choosing the lexicographically first cat varies across groups, conditioning on unordered cat identity pair. This controls for different cat-pair exposure across groups and answers a different question from the marginal A/B position shares. P-values are asymptotic and Holm-adjusted across all six group variables. The data include cat IDs, image IDs, A/B side, choice, comparison type, and unique response-row IDs, but no participant ID; this record-level test cannot correct within-participant dependence, so p-values are exploratory rather than cluster-valid inference.

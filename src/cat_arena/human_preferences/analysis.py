@@ -119,6 +119,18 @@ def _position_choices(data):
     return pd.DataFrame(rows)
 
 
+def _group_distribution(data):
+    """Category counts and shares; missing is shown as its own category."""
+    rows = []
+    for variable in GROUPS:
+        values = data[variable].astype('object').where(data[variable].notna(), 'Missing')
+        counts = values.value_counts(dropna=False, sort=False)
+        for group, n in counts.items():
+            rows.append(dict(group_variable=variable, group=str(group), n_responses=int(n),
+                             proportion=float(n/len(data)), n_total=int(len(data))))
+    return pd.DataFrame(rows)
+
+
 def _group_bradley_terry(data):
     """Fit separate, unregularized BT models for pet-history groups when identifiable."""
     rows, diagnostics = [], []
@@ -145,9 +157,11 @@ def _rank_table(data, group_col):
         win_rate = wins.reindex(appearances.index, fill_value=0).div(appearances)
         rank = win_rate.rank(method='min', ascending=False).astype(int)
         for cat, comparisons in appearances.items():
+            low, high = _wilson(int(wins.get(cat, 0)), int(comparisons))
             rows.append(dict(group_variable=group_col, group=group, cat_id=cat,
                              comparisons=int(comparisons), wins=int(wins.get(cat, 0)),
-                             win_rate=float(win_rate[cat]), rank=int(rank[cat])))
+                             win_rate=float(win_rate[cat]), win_rate_ci95_low=low,
+                             win_rate_ci95_high=high, rank=int(rank[cat])))
     return pd.DataFrame(rows).sort_values(['group_variable', 'group', 'rank', 'cat_id']).reset_index(drop=True)
 
 
@@ -179,6 +193,48 @@ def _coverage(data):
     return pd.DataFrame(rows)
 
 
+def _pet_history_pair_standardized_differences(data, ranks, top_n=5):
+    """Compare cat choice rates across history groups over their common cat pairs.
+
+    The risk difference is standardized over shared opponent-pair strata, weighted
+    by pooled records. Its approximate interval assumes independent records and
+    cannot adjust for unobserved participant clustering.
+    """
+    history_ranks = ranks.loc[ranks.group_variable.eq('pet_history')]
+    cats = []
+    for group in sorted(history_ranks.group.unique()):
+        cats.extend(history_ranks.loc[history_ranks.group.eq(group)].nsmallest(top_n, 'rank').cat_id.tolist())
+    cats = list(dict.fromkeys(cats))
+    groups = sorted(data.pet_history.dropna().unique())
+    rows = []
+    for cat in cats:
+        d = data.loc[data.pet_history.notna() & (data.cat_1.eq(cat) | data.cat_2.eq(cat))].copy()
+        d['focal_win'] = np.where(d.cat_1.eq(cat), d.choice_cat_1, 1-d.choice_cat_1)
+        summary = d.groupby(['cat_pair_id', 'pet_history'], observed=True).focal_win.agg(['sum', 'count'])
+        counts = summary['count'].unstack('pet_history').reindex(columns=groups)
+        wins = summary['sum'].unstack('pet_history').reindex(columns=groups)
+        for group_1, group_2 in combinations(groups, 2):
+            n1, n2 = counts[group_1], counts[group_2]
+            common = n1.notna() & n2.notna()
+            n1, n2 = n1[common].astype(float), n2[common].astype(float)
+            w1, w2 = wins.loc[common, group_1].astype(float), wins.loc[common, group_2].astype(float)
+            if len(n1) == 0:
+                continue
+            p1, p2 = w1/n1, w2/n2
+            pooled_n = n1+n2
+            weights = pooled_n/pooled_n.sum()
+            difference = float((weights*(p1-p2)).sum())
+            variance = float((weights.pow(2)*(p1*(1-p1)/n1+p2*(1-p2)/n2)).sum())
+            se = np.sqrt(variance)
+            rows.append(dict(cat_id=cat, group_1=group_1, group_2=group_2,
+                             group_1_minus_group_2=difference,
+                             ci95_low=difference-1.959963984540054*se,
+                             ci95_high=difference+1.959963984540054*se,
+                             common_cat_pairs=int(len(n1)), n_group_1=int(n1.sum()),
+                             n_group_2=int(n2.sum())))
+    return pd.DataFrame(rows)
+
+
 def _plot_ranks(ranks, out):
     fig, axes = plt.subplots(2, 3, figsize=(21, 12), sharex=False)
     for ax, variable in zip(axes.flat, GROUPS):
@@ -192,7 +248,7 @@ def _plot_ranks(ranks, out):
         matrix = matrix.reindex(index=cats, columns=groups)
         x = np.arange(len(cats))
         width = .82/len(groups)
-        colors = [BLUE if i % 2 == 0 else ORANGE for i in range(len(groups))]
+        colors = [plt.get_cmap('tab10')(i) for i in range(len(groups))]
         for i, (group, color) in enumerate(zip(groups, colors)):
             ax.bar(x+(i-(len(groups)-1)/2)*width, matrix[group], width, color=color, label=group)
         ax.set_title(variable.replace('_', ' '))
@@ -206,6 +262,100 @@ def _plot_ranks(ranks, out):
     fig.savefig(out/'figures/group_cat_rankings.png', dpi=300, bbox_inches='tight')
     fig.savefig(out/'figures/group_cat_rankings.pdf', bbox_inches='tight')
     plt.close(fig)
+
+
+def _save_png_pdf(fig, out, name):
+    fig.savefig(out/'figures'/f'{name}.png', dpi=300, bbox_inches='tight')
+    fig.savefig(out/'figures'/f'{name}.pdf', bbox_inches='tight')
+    plt.close(fig)
+
+
+def _plot_group_distribution(distribution, out):
+    fig, axes = plt.subplots(2, 3, figsize=(17, 10))
+    palette = plt.get_cmap('tab10')
+    for ax, variable in zip(axes.flat, GROUPS):
+        subset = distribution.loc[distribution.group_variable.eq(variable)].sort_values('n_responses')
+        colors = [palette(i % 10) for i in range(len(subset))]
+        bars = ax.barh(subset.group, subset.proportion, color=colors)
+        for bar, row in zip(bars, subset.itertuples(index=False)):
+            ax.text(bar.get_width()+.006, bar.get_y()+bar.get_height()/2,
+                    f'{row.n_responses:,} ({row.proportion:.1%})', va='center', fontsize=8)
+        ax.set_title(variable.replace('_', ' '))
+        ax.set_xlabel('Share of between-cat response records')
+        ax.set_xlim(0, max(.5, float(subset.proportion.max())*1.55))
+        ax.spines[['top', 'right']].set_visible(False)
+    fig.suptitle('Group sample sizes and category distributions (missing shown separately)')
+    fig.tight_layout()
+    _save_png_pdf(fig, out, 'group_sample_and_category_distribution')
+
+
+def _plot_position_intervals(position_choices, out):
+    fig, axes = plt.subplots(2, 3, figsize=(17, 11))
+    for ax, variable in zip(axes.flat, GROUPS):
+        subset = position_choices.loc[position_choices.group_variable.eq(variable)].sort_values('group')
+        y = np.arange(len(subset))
+        p = subset.proportion_choose_a.to_numpy()
+        low = subset.choose_a_ci95_low.to_numpy()
+        high = subset.choose_a_ci95_high.to_numpy()
+        ax.errorbar(p, y, xerr=np.vstack([p-low, high-p]), fmt='o', color=BLUE,
+                    ecolor=BLUE, capsize=3)
+        ax.axvline(.5, color='#777777', linestyle='--', linewidth=1)
+        ax.set_yticks(y, subset.group)
+        ax.set_xlim(0.35, 0.65)
+        ax.set_xlabel('Proportion choosing A (Wilson 95% CI)')
+        ax.set_title(variable.replace('_', ' '))
+        ax.spines[['top', 'right']].set_visible(False)
+    fig.suptitle('A/B position choice by group — between-cat comparisons')
+    fig.tight_layout()
+    _save_png_pdf(fig, out, 'group_ab_choice_intervals')
+
+
+def _plot_pet_history_cat_rates(ranks, out, top_n=5):
+    subset = ranks.loc[ranks.group_variable.eq('pet_history')]
+    groups = sorted(subset.group.unique())
+    cats = []
+    for group in groups:
+        cats.extend(subset.loc[subset.group.eq(group)].nsmallest(top_n, 'rank').cat_id.tolist())
+    cats = list(dict.fromkeys(cats))
+    width = .8/len(groups)
+    fig, ax = plt.subplots(figsize=(max(12, .8*len(cats)), 7))
+    palette = plt.get_cmap('tab10')
+    for i, group in enumerate(groups):
+        values = subset.loc[subset.group.eq(group)].set_index('cat_id').reindex(cats)
+        x = np.arange(len(cats))+(i-(len(groups)-1)/2)*width
+        rate = values.win_rate.to_numpy()
+        low, high = values.win_rate_ci95_low.to_numpy(), values.win_rate_ci95_high.to_numpy()
+        ax.errorbar(x, rate, yerr=np.vstack([rate-low, high-rate]), fmt='o', capsize=3,
+                    label=group, color=palette(i))
+    ax.set_xticks(np.arange(len(cats)), cats, rotation=65, ha='right')
+    ax.set_ylim(0, 1)
+    ax.set_ylabel('Empirical cat win rate (Wilson 95% CI)')
+    ax.set_title('Cat choice rates by pet history (union of each group’s top five cats)')
+    ax.legend(title='pet_history', frameon=False)
+    ax.spines[['top', 'right']].set_visible(False)
+    fig.tight_layout()
+    _save_png_pdf(fig, out, 'pet_history_cat_choice_rates')
+
+
+def _plot_pet_history_differences(differences, out):
+    groups = sorted(set(differences.group_1) | set(differences.group_2))
+    contrasts = list(combinations(groups, 2))
+    fig, axes = plt.subplots(1, len(contrasts), figsize=(18, 7), sharey=True)
+    for ax, (group_1, group_2) in zip(axes, contrasts):
+        subset = differences.loc[differences.group_1.eq(group_1) & differences.group_2.eq(group_2)].sort_values('cat_id')
+        y = np.arange(len(subset))
+        effect = subset.group_1_minus_group_2.to_numpy()
+        low, high = subset.ci95_low.to_numpy(), subset.ci95_high.to_numpy()
+        ax.errorbar(effect, y, xerr=np.vstack([effect-low, high-effect]), fmt='o', capsize=3,
+                    color=BLUE)
+        ax.axvline(0, color='#777777', linestyle='--', linewidth=1)
+        ax.set_yticks(y, subset.cat_id)
+        ax.set_title(f'{group_1} − {group_2}')
+        ax.set_xlabel('Difference in choice rate\n(approx. 95% CI)')
+        ax.spines[['top', 'right']].set_visible(False)
+    fig.suptitle('Pet-history differences in cat choice, standardized over shared opponents')
+    fig.tight_layout()
+    _save_png_pdf(fig, out, 'pet_history_group_preference_differences')
 
 
 def run(data_path=None, output_dir=None):
@@ -223,16 +373,24 @@ def run(data_path=None, output_dir=None):
     tests['p_holm'] = _holm(tests.p_value)
     # A/B position is summarized on between-cat rows to align with identity analysis.
     position_choices = _position_choices(data)
+    group_distribution = _group_distribution(data)
     group_bt, group_bt_diagnostics = _group_bradley_terry(data)
     rank_comparisons = _rank_comparisons(ranks)
+    pet_history_differences = _pet_history_pair_standardized_differences(data, ranks)
     coverage.to_csv(out/'tables/group_coverage.csv', index=False)
     ranks.to_csv(out/'tables/cat_rankings_by_group.csv', index=False)
     tests.to_csv(out/'tables/stratified_tests.csv', index=False)
     rank_comparisons.to_csv(out/'tables/rank_comparisons.csv', index=False)
     position_choices.to_csv(out/'tables/position_choices.csv', index=False)
+    group_distribution.to_csv(out/'tables/group_category_distribution.csv', index=False)
+    pet_history_differences.to_csv(out/'tables/pet_history_cat_group_differences.csv', index=False)
     group_bt.to_csv(out/'tables/pet_history_group_bt_scores.csv', index=False)
     group_bt_diagnostics.to_csv(out/'tables/pet_history_group_bt_diagnostics.csv', index=False)
     _plot_ranks(ranks, out)
+    _plot_group_distribution(group_distribution, out)
+    _plot_position_intervals(position_choices, out)
+    _plot_pet_history_cat_rates(ranks, out)
+    _plot_pet_history_differences(pet_history_differences, out)
     missingness = pd.DataFrame([dict(group_variable=v, n_missing=int(full[v].isna().sum()),
                                      n_total=len(full), n_between_cats=int(full.comparison_type.eq('between_cats').sum()),
                                      n_between_nonmissing=int(data[v].notna().sum())) for v in GROUPS])
@@ -259,6 +417,8 @@ def run(data_path=None, output_dir=None):
     write_text(out/'run_metadata.json', json.dumps(meta, ensure_ascii=False, indent=2)+'\n')
     return dict(coverage=coverage, rankings=ranks, tests=tests, rank_comparisons=rank_comparisons,
                 position_choices=position_choices, field_audit=field_audit,
+                group_distribution=group_distribution,
+                pet_history_differences=pet_history_differences,
                 group_bt=group_bt, group_bt_diagnostics=group_bt_diagnostics,
                 missingness=missingness, summary=summary)
 
@@ -287,7 +447,17 @@ def write_report(result, output_path=None):
         '| Variable | Group 1 | Group 2 | Cats ranked | Spearman rank correlation | Top-10 overlap |', '|---|---|---|---:|---:|---:|']
     for row in result['rank_comparisons'].itertuples(index=False):
         lines.append(f'| {row.group_variable} | {row.group_1} | {row.group_2} | {row.cats_ranked} | {row.spearman_rank_correlation:.3f} | {row.top_10_overlap}/10 |')
-    lines += ['', '## Statistical tests', '',
+    lines += ['', '## Sample size and category distribution', '',
+        '![Group sample size and category distribution](../../outputs/human_preferences/figures/group_sample_and_category_distribution.png)', '',
+        'Counts and shares, with missing values shown separately, are in `outputs/human_preferences/tables/group_category_distribution.csv`.', '',
+        '![A/B choice proportions with Wilson intervals](../../outputs/human_preferences/figures/group_ab_choice_intervals.png)', '',
+        'The displayed A/B intervals are descriptive record-level Wilson intervals; they do not account for participant clustering.', '',
+        '## Cat-specific choices and group contrasts', '',
+        '![Pet-history cat win rates](../../outputs/human_preferences/figures/pet_history_cat_choice_rates.png)', '',
+        'The plot shows each pet-history group’s empirical win rate for the union of that group’s top five cats, with record-level Wilson intervals. Exact cat/group counts are in `cat_rankings_by_group.csv`.', '',
+        '![Pet-history group differences in cat choice](../../outputs/human_preferences/figures/pet_history_group_preference_differences.png)', '',
+        'The contrast plot compares pet-history groups on shared unordered cat-pair strata, weighted by pooled response records. It shows exploratory risk differences and approximate intervals, not a fitted interaction model; participant-level dependence remains unadjusted.', '',
+        '## Statistical tests', '',
         'A cat-pair-stratified score chi-square test checks whether the probability of choosing the lexicographically first cat varies across groups, conditioning on unordered cat identity pair. This controls for different cat-pair exposure across groups and answers a different question from the marginal A/B position shares. P-values are asymptotic and Holm-adjusted across all six group variables. The data include cat IDs, image IDs, A/B side, choice, comparison type, and unique response-row IDs, but no participant ID; this record-level test cannot correct within-participant dependence, so p-values are exploratory rather than cluster-valid inference.', '',
         '| Variable | Response records | Informative cat pairs | χ² | df | p | Holm-adjusted p |', '|---|---:|---:|---:|---:|---:|---:|']
     for row in result['tests'].itertuples(index=False):
