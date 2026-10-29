@@ -39,6 +39,18 @@
     {
       "check": "cat_ranking_implementation_and_sources_current",
       "passed": true
+    },
+    {
+      "check": "model_comparison_implementation_current",
+      "passed": true
+    },
+    {
+      "check": "model_comparison_sources_current",
+      "passed": true
+    },
+    {
+      "check": "model_comparison_validation_not_used_for_fitting",
+      "passed": true
     }
   ],
   "full_source_image_audit_rerun": false,

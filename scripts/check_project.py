@@ -64,6 +64,16 @@ def main():
                    and cat_meta['config_sha256'] == digest(ROOT/'configs/default.json')
                    and cat_meta['source_sha256'] == digest(ROOT/'data/processed/train_clean.csv'))
     checks.append(dict(check='cat_ranking_implementation_and_sources_current', passed=cat_current))
+    model_meta = json.loads((ROOT/'outputs/model_comparison/run_metadata.json').read_text(encoding='utf-8'))
+    model_current = (model_meta['analysis_sha256'] == digest(ROOT/'src/cat_arena/model_comparison/analysis.py')
+                     and model_meta['design_sha256'] == digest(ROOT/'src/cat_arena/model_comparison/design.py')
+                     and model_meta['config_sha256'] == digest(ROOT/'configs/default.json'))
+    checks.append(dict(check='model_comparison_implementation_current', passed=model_current))
+    model_sources = (model_meta['source_sha256'] == digest(ROOT/'data/processed/train_clean.csv')
+                     and model_meta['split_sha256'] == digest(ROOT/'data/splits/validation_split.csv'))
+    checks.append(dict(check='model_comparison_sources_current', passed=model_sources))
+    checks.append(dict(check='model_comparison_validation_not_used_for_fitting',
+                       passed=model_meta.get('validation_data_used_for_fitting') is False))
     report = dict(passed=all(c['passed'] for c in checks), baseline_commit=baseline['commit'],
                   checks=checks, full_source_image_audit_rerun=False,
                   limitation='This check does not execute the full raw-image audit. Run source preparation/audit separately when course images are available.')

@@ -23,9 +23,9 @@ python -m venv .venv
 | 猫咪排名与BT基础模型 | 成员2 | `cat_ranking/` | `run_cat_ranking.py` | 已接入可复用拟合函数 |
 | 图片差异与偏好分歧 | 成员3 | `image_analysis/` | `run_image_analysis.py` | 已交付并完成迁移复现 |
 | 人群差异 | 成员4 | `human_preferences/` | `run_human_preferences.py` | 已交付；按人群比较猫咪经验胜率 |
-| 扩展模型与报告整合 | 成员5 | `model_comparison/` | 待实现 | 已预留接口与交付说明 |
+| 扩展模型与报告整合 | 成员5 | `model_comparison/` | `run_model_comparison.py` | 已交付；扩展模型比较、验证与排名稳健性 |
 
-`run_all.py`运行已实现、可凭清洗数据执行的成员2/3/4模块，不代表成员5已完成。加`--prepare-data`会先重建并审计成员1数据，要求原始CSV及全部引用图片已放入`data/raw/`。
+`run_all.py`运行已实现、可凭清洗数据执行的成员2/3/4/5模块，不代表成员1的完整重建已完成。加`--prepare-data`会先重建并审计成员1数据，要求原始CSV及全部引用图片已放入`data/raw/`。
 
 ## 目录与数据流
 

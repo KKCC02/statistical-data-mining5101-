@@ -1,0 +1,18 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  },
+  "source_sha256": "ddcb943cca8265ba4b776d9d31245add6a7b7e225189eadef7c2f2d2b87e6522",
+  "split_sha256": "4cf171c1aa2db1c5e23f2c21a55c3bba9f236639d084f746b14d77036e296701",
+  "design_sha256": "a56354e795cc807216273579f4cde27b6e35a5a5ff6d90b9df69d0a3c8d971cb",
+  "analysis_sha256": "e34901c4d307f3eea71e63b22ee9915e0232137401e407bd036687e424cb1c0d",
+  "config_sha256": "48c27366427f5ec01f149888e6a53c3b0a102bc0b7ed31558484e00d1d2661bb",
+  "input_sha256": "ddcb943cca8265ba4b776d9d31245add6a7b7e225189eadef7c2f2d2b87e6522",
+  "validation_data_used_for_fitting": false,
+  "runtime_seconds": 123.049
+}

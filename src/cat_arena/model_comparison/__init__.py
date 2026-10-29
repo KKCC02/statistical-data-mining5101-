@@ -1,1 +1,1 @@
-"""Member 5 extension point. Model comparison has not yet been delivered."""
+"""Member 5: nested model comparison, validation and cat-ranking stability."""

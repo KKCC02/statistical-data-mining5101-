@@ -1,0 +1,256 @@
+{
+  "input_file": "data/processed/train_clean.csv",
+  "split_file": "data/splits/validation_split.csv",
+  "n_train_records": 19981,
+  "n_validation_records": 4915,
+  "n_train_pairs": 6439,
+  "n_validation_pairs": 1610,
+  "n_cats": 237,
+  "n_images": 1295,
+  "validation_coverage": 1.0,
+  "penalties": {
+    "M0_cat_baseline": {},
+    "M1_position": {},
+    "M2_image": {
+      "image": 0.3
+    },
+    "M3_group_main": {},
+    "M4_group_interaction": {
+      "image": 0.3,
+      "group_cat": 1.0
+    }
+  },
+  "metrics": [
+    {
+      "model": "M0_cat_baseline",
+      "label": "Cat ability only (BT baseline)",
+      "blocks": "cat",
+      "parameters": 236,
+      "penalized_parameters": 0,
+      "penalties": "{}",
+      "unseen_row_share": 0.0,
+      "log_loss": 0.6689043905662799,
+      "brier": 0.23783488914010026,
+      "accuracy": 0.5849440488301119,
+      "delta_log_loss_vs_baseline": 0.0,
+      "delta_ci_low": 0.0,
+      "delta_ci_high": 0.0,
+      "improves_on_baseline": false
+    },
+    {
+      "model": "M1_position",
+      "label": "+ A/B presentation position",
+      "blocks": "cat+side",
+      "parameters": 237,
+      "penalized_parameters": 0,
+      "penalties": "{}",
+      "unseen_row_share": 0.0,
+      "log_loss": 0.668951823148844,
+      "brier": 0.23784810635695094,
+      "accuracy": 0.5877924720244151,
+      "delta_log_loss_vs_baseline": 4.743258256413354e-05,
+      "delta_ci_low": -0.0011906695510121499,
+      "delta_ci_high": 0.0012339987117305302,
+      "improves_on_baseline": false
+    },
+    {
+      "model": "M2_image",
+      "label": "+ regularized image effect",
+      "blocks": "cat+side+image",
+      "parameters": 1532,
+      "penalized_parameters": 1295,
+      "penalties": "{\"image\": 0.3}",
+      "unseen_row_share": 0.0,
+      "log_loss": 0.66893021701829,
+      "brier": 0.2378384072902863,
+      "accuracy": 0.5877924720244151,
+      "delta_log_loss_vs_baseline": 2.582645201009477e-05,
+      "delta_ci_low": -0.0012135126812519396,
+      "delta_ci_high": 0.0012118449360798173,
+      "improves_on_baseline": false
+    },
+    {
+      "model": "M3_group_main",
+      "label": "+ pet_history main effect",
+      "blocks": "cat+side+group",
+      "parameters": 240,
+      "penalized_parameters": 0,
+      "penalties": "{}",
+      "unseen_row_share": 0.0,
+      "log_loss": 0.669093508955308,
+      "brier": 0.23788173256146722,
+      "accuracy": 0.5835198372329603,
+      "delta_log_loss_vs_baseline": 0.0001891183890279951,
+      "delta_ci_low": -0.0017472978604681007,
+      "delta_ci_high": 0.0020355333786994854,
+      "improves_on_baseline": false
+    },
+    {
+      "model": "M4_group_interaction",
+      "label": "+ pet_history x cat interaction",
+      "blocks": "cat+side+image+group+group_cat",
+      "parameters": 2479,
+      "penalized_parameters": 2239,
+      "penalties": "{\"group_cat\": 1.0, \"image\": 0.3}",
+      "unseen_row_share": 0.0,
+      "log_loss": 0.6690712287193891,
+      "brier": 0.23787181551327444,
+      "accuracy": 0.5835198372329603,
+      "delta_log_loss_vs_baseline": 0.00016683815310902897,
+      "delta_ci_low": -0.0017667519355041843,
+      "delta_ci_high": 0.0020112040180209137,
+      "improves_on_baseline": false
+    }
+  ],
+  "metrics_by_comparison_type": [
+    {
+      "model": "M0_cat_baseline",
+      "comparison_type": "between_cats",
+      "records": 4308,
+      "log_loss": 0.6654885656994844,
+      "brier": 0.23612081711318306,
+      "accuracy": 0.5944753946146704
+    },
+    {
+      "model": "M0_cat_baseline",
+      "comparison_type": "within_cat",
+      "records": 607,
+      "log_loss": 0.6931471805599453,
+      "brier": 0.25,
+      "accuracy": 0.5172981878088962
+    },
+    {
+      "model": "M1_position",
+      "comparison_type": "between_cats",
+      "records": 4308,
+      "log_loss": 0.6656167779228549,
+      "brier": 0.23617294575751552,
+      "accuracy": 0.5977251624883937
+    },
+    {
+      "model": "M1_position",
+      "comparison_type": "within_cat",
+      "records": 607,
+      "log_loss": 0.6926213039290119,
+      "brier": 0.24973705505936922,
+      "accuracy": 0.5172981878088962
+    },
+    {
+      "model": "M2_image",
+      "comparison_type": "between_cats",
+      "records": 4308,
+      "log_loss": 0.6655960220060785,
+      "brier": 0.23616382313269338,
+      "accuracy": 0.5977251624883937
+    },
+    {
+      "model": "M2_image",
+      "comparison_type": "within_cat",
+      "records": 607,
+      "log_loss": 0.6925936636617951,
+      "brier": 0.24972326487003965,
+      "accuracy": 0.5172981878088962
+    },
+    {
+      "model": "M3_group_main",
+      "comparison_type": "between_cats",
+      "records": 4308,
+      "log_loss": 0.6659281646812825,
+      "brier": 0.23628363764792615,
+      "accuracy": 0.5942432683379758
+    },
+    {
+      "model": "M3_group_main",
+      "comparison_type": "within_cat",
+      "records": 607,
+      "log_loss": 0.6915585882510279,
+      "brier": 0.2492237307287408,
+      "accuracy": 0.5074135090609555
+    },
+    {
+      "model": "M4_group_interaction",
+      "comparison_type": "between_cats",
+      "records": 4308,
+      "log_loss": 0.6659065865013893,
+      "brier": 0.2362742401236217,
+      "accuracy": 0.5942432683379758
+    },
+    {
+      "model": "M4_group_interaction",
+      "comparison_type": "within_cat",
+      "records": 607,
+      "log_loss": 0.6915313253835443,
+      "brier": 0.24921012651595004,
+      "accuracy": 0.5074135090609555
+    }
+  ],
+  "adopted_model": "M0_cat_baseline",
+  "position_effect_logit": 0.09335442768191213,
+  "a_side_probability": 0.523321671920359,
+  "image_gain_by_comparison_type": {
+    "between_cats": 0.00010745630659403371,
+    "within_cat": -0.000553516898150197
+  },
+  "rank_agreement_baseline_vs_adopted": 1.0,
+  "rank_specification_agreement": [
+    {
+      "model": "M0_cat_baseline",
+      "spearman_vs_baseline": 1.0,
+      "top10_overlap_vs_baseline": 10,
+      "max_abs_rank_change": 0
+    },
+    {
+      "model": "M1_position",
+      "spearman_vs_baseline": 0.9999197705256743,
+      "top10_overlap_vs_baseline": 10,
+      "max_abs_rank_change": 4
+    },
+    {
+      "model": "M2_image",
+      "spearman_vs_baseline": 0.9999197705256743,
+      "top10_overlap_vs_baseline": 10,
+      "max_abs_rank_change": 4
+    },
+    {
+      "model": "M3_group_main",
+      "spearman_vs_baseline": 0.9996971111980514,
+      "top10_overlap_vs_baseline": 10,
+      "max_abs_rank_change": 9
+    },
+    {
+      "model": "M4_group_interaction",
+      "spearman_vs_baseline": 0.9996962097432838,
+      "top10_overlap_vs_baseline": 10,
+      "max_abs_rank_change": 9
+    }
+  ],
+  "most_divergent_specification": "M4_group_interaction",
+  "baseline_rank_stability": {
+    "repetitions": 200,
+    "used": 200,
+    "top10_overlap_mean": 0.7340000000000001,
+    "top10_overlap_min": 0.4,
+    "spearman_vs_point_median": 0.9514611680329716,
+    "spearman_vs_point_low": 0.9361455191387863,
+    "spearman_vs_point_high": 0.9610268876913562
+  },
+  "adopted_rank_stability": {
+    "repetitions": 200,
+    "used": 200,
+    "top10_overlap_mean": 0.7340000000000001,
+    "top10_overlap_min": 0.4,
+    "spearman_vs_point_median": 0.9514611680329716,
+    "spearman_vs_point_low": 0.9361455191387863,
+    "spearman_vs_point_high": 0.9610268876913562
+  },
+  "split_half": {
+    "spearman": 0.7908633953474117,
+    "spearman_brown": 0.88322023600688,
+    "top10_overlap": 5,
+    "cats": 237,
+    "first_records": 9987,
+    "second_records": 9994
+  },
+  "participant_id_available": false,
+  "limitation": "Rows are response records, not identified people. Repeated responses, shared cats and shared images induce dependence that the cluster bootstrap over image pairs only partly removes."
+}
