@@ -13,7 +13,9 @@ python -m venv .venv
 .venv/Scripts/python scripts/check_project.py
 ```
 
-默认使用已有清洗数据，运行猫咪排名、图片分歧分析和人群偏好分析，无需图片、GPU或外部模型下载。核心依赖在`requirements.txt`，完整已验证环境在`requirements.lock.txt`。需要导入包的Notebook环境可额外执行`python -m pip install -e . --no-deps`。
+默认使用已有清洗数据，运行猫咪排名、图片分歧分析、人群偏好分析和扩展模型比较，无需图片、GPU或外部模型下载。核心依赖在`requirements.txt`，完整已验证环境在`requirements.lock.txt`。需要导入包的Notebook环境可额外执行`python -m pip install -e . --no-deps`。
+
+提交代码包的运行说明见 [README_SUBMISSION.md](README_SUBMISSION.md)。打包入口为 `scripts/build_submission.py --output <ZIP路径>`；它仅收集 Git 已跟踪文件及三份指定的课程 CSV，不包含 Git 历史、虚拟环境、缓存和原始图片。
 
 ## 模块与负责人
 

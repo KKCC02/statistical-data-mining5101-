@@ -41,6 +41,10 @@
       "passed": true
     },
     {
+      "check": "human_preferences_implementation_and_sources_current",
+      "passed": true
+    },
+    {
       "check": "model_comparison_implementation_current",
       "passed": true
     },

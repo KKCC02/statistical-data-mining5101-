@@ -11,5 +11,5 @@
   "analysis_sha256": "a8d1005c8da42e57831db07ab21c8bc62d3956b3877366f8b6e1e76c53334cac",
   "model_sha256": "f05ffc9f5af6084daf77591a9850428fd17be7a1f8a58f75884202822d9189ec",
   "config_sha256": "48c27366427f5ec01f149888e6a53c3b0a102bc0b7ed31558484e00d1d2661bb",
-  "runtime_seconds": 1.414
+  "runtime_seconds": 1.33
 }
