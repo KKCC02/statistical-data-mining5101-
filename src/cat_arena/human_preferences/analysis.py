@@ -6,13 +6,15 @@ import json
 from itertools import combinations
 from pathlib import Path
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.stats import chi2, spearmanr
 
 from cat_arena.common.data import load_training
-from cat_arena.common.paths import module_output, project_path, write_text
+from cat_arena.common.paths import PROJECT_ROOT, module_output, project_path, write_text
 from cat_arena.cat_ranking.model import fit_bradley_terry
 
 PRIMARY = 'pet_history'
@@ -377,15 +379,15 @@ def run(data_path=None, output_dir=None):
     group_bt, group_bt_diagnostics = _group_bradley_terry(data)
     rank_comparisons = _rank_comparisons(ranks)
     pet_history_differences = _pet_history_pair_standardized_differences(data, ranks)
-    coverage.to_csv(out/'tables/group_coverage.csv', index=False)
-    ranks.to_csv(out/'tables/cat_rankings_by_group.csv', index=False)
-    tests.to_csv(out/'tables/stratified_tests.csv', index=False)
-    rank_comparisons.to_csv(out/'tables/rank_comparisons.csv', index=False)
-    position_choices.to_csv(out/'tables/position_choices.csv', index=False)
-    group_distribution.to_csv(out/'tables/group_category_distribution.csv', index=False)
-    pet_history_differences.to_csv(out/'tables/pet_history_cat_group_differences.csv', index=False)
-    group_bt.to_csv(out/'tables/pet_history_group_bt_scores.csv', index=False)
-    group_bt_diagnostics.to_csv(out/'tables/pet_history_group_bt_diagnostics.csv', index=False)
+    coverage.to_csv(out/'tables/group_coverage.csv', index=False, lineterminator='\n')
+    ranks.to_csv(out/'tables/cat_rankings_by_group.csv', index=False, lineterminator='\n')
+    tests.to_csv(out/'tables/stratified_tests.csv', index=False, lineterminator='\n')
+    rank_comparisons.to_csv(out/'tables/rank_comparisons.csv', index=False, lineterminator='\n')
+    position_choices.to_csv(out/'tables/position_choices.csv', index=False, lineterminator='\n')
+    group_distribution.to_csv(out/'tables/group_category_distribution.csv', index=False, lineterminator='\n')
+    pet_history_differences.to_csv(out/'tables/pet_history_cat_group_differences.csv', index=False, lineterminator='\n')
+    group_bt.to_csv(out/'tables/pet_history_group_bt_scores.csv', index=False, lineterminator='\n')
+    group_bt_diagnostics.to_csv(out/'tables/pet_history_group_bt_diagnostics.csv', index=False, lineterminator='\n')
     _plot_ranks(ranks, out)
     _plot_group_distribution(group_distribution, out)
     _plot_position_intervals(position_choices, out)
@@ -394,14 +396,18 @@ def run(data_path=None, output_dir=None):
     missingness = pd.DataFrame([dict(group_variable=v, n_missing=int(full[v].isna().sum()),
                                      n_total=len(full), n_between_cats=int(full.comparison_type.eq('between_cats').sum()),
                                      n_between_nonmissing=int(data[v].notna().sum())) for v in GROUPS])
-    missingness.to_csv(out/'tables/missingness.csv', index=False)
+    missingness.to_csv(out/'tables/missingness.csv', index=False, lineterminator='\n')
     audited_fields = ['train_row_id', 'a_cat', 'b_cat', 'a_image', 'b_image', 'choice', 'comparison_type', *GROUPS]
     field_audit = pd.DataFrame([dict(field=field, present=field in full.columns,
                                      n_nonmissing=int(full[field].notna().sum()) if field in full else 0,
                                      n_levels=int(full[field].nunique(dropna=True)) if field in full else 0)
                                 for field in audited_fields])
-    field_audit.to_csv(out/'tables/field_audit.csv', index=False)
-    summary = dict(input_file=str(data_path), n_train_records=len(full), n_between_cat_responses=len(data),
+    field_audit.to_csv(out/'tables/field_audit.csv', index=False, lineterminator='\n')
+    try:
+        input_label = Path(data_path).resolve().relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        input_label = Path(data_path).as_posix()
+    summary = dict(input_file=input_label, n_train_records=len(full), n_between_cat_responses=len(data),
                    primary_variable=PRIMARY, group_variables=list(GROUPS),
                    missingness=missingness.to_dict(orient='records'),
                    tests=tests.to_dict(orient='records'),

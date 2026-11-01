@@ -1,5 +1,5 @@
 {
-  "input_file": "/Users/shu/Documents/GitHub/statistical-data-mining5101-/data/processed/train_clean.csv",
+  "input_file": "data/processed/train_clean.csv",
   "n_train_records": 24896,
   "n_between_cat_responses": 21893,
   "primary_variable": "pet_history",
@@ -59,9 +59,9 @@
     {
       "group_variable": "pet_history",
       "test": "cat-pair-stratified score chi-square",
-      "statistic": 1.33934397179231,
+      "statistic": 1.3393439717923097,
       "df": 2,
-      "p_value": 0.51187645294832,
+      "p_value": 0.5118764529483202,
       "informative_cat_pairs": 3917,
       "n_records": 21434,
       "groups": "current;never;past",
@@ -70,7 +70,7 @@
     {
       "group_variable": "pet_contact",
       "test": "cat-pair-stratified score chi-square",
-      "statistic": 0.8500777919966527,
+      "statistic": 0.8500777919966525,
       "df": 4,
       "p_value": 0.9316111361885808,
       "informative_cat_pairs": 4196,
@@ -83,7 +83,7 @@
       "test": "cat-pair-stratified score chi-square",
       "statistic": 4.503328539202148,
       "df": 3,
-      "p_value": 0.21199358135045054,
+      "p_value": 0.2119935813504512,
       "informative_cat_pairs": 4145,
       "n_records": 21434,
       "groups": "current_regular;never;occasionally;past_regular",
