@@ -1,6 +1,6 @@
 ﻿model,spearman_vs_baseline,top10_overlap_vs_baseline,max_abs_rank_change
 M0_cat_baseline,1.0,10,0
 M1_position,0.9999197705256743,10,4
-M2_image,0.9999197705256743,10,4
+M2_image,0.9999188690709065,10,4
 M3_group_main,0.9996971111980514,10,9
-M4_group_interaction,0.9996962097432838,10,9
+M4_group_interaction,0.999695308288516,10,9

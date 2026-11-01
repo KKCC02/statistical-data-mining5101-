@@ -1,5 +1,6 @@
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'src'))
 from cat_arena.cat_ranking.model import fit_bradley_terry
 from cat_arena.model_comparison.analysis import metrics
 from cat_arena.model_comparison.design import fit
+from cat_arena.model_comparison import design
 
 
 COLUMNS = ['a_cat', 'b_cat', 'a_image', 'b_image', 'choice', 'comparison_type', 'pet_history']
@@ -39,6 +41,13 @@ def position_bias():
 
 
 class PairwiseDesignTests(unittest.TestCase):
+    def test_exhausted_budget_continues_to_analytic_solution(self):
+        with patch.dict(design.CONFIG['cat_ranking'], maxiter=1):
+            model = fit(two_cat(), ['cat'])
+        self.assertTrue(model.diagnostics['restarted_after_budget'])
+        self.assertTrue(model.diagnostics['converged'])
+        np.testing.assert_allclose(model.predict_proba(two_cat()), .75, atol=1e-7)
+
     def test_cat_block_reproduces_bradley_terry(self):
         data = two_cat()
         ours = fit(data, ['cat']).cat_scores().set_index('cat_id').score

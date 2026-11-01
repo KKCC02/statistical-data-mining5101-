@@ -230,14 +230,25 @@ def fit(frame, blocks, penalties=None):
         gradient = -(x.T@(y*expit(-margin)))/x.shape[0]+2*penalty*weight
         return loss, np.asarray(gradient).ravel()
 
+    options = dict(CONFIG['cat_ranking'])
     result = minimize(objective, np.zeros(x.shape[1]), jac=True, method='L-BFGS-B',
-                      options=CONFIG['cat_ranking'])
+                      options=options)
+    restarted = False
+    # Large L2 candidates can exhaust the shared BT budget on a different BLAS
+    # implementation. Continue the same objective from the current coefficients,
+    # retaining the original ftol/gtol; never accept an unconverged fit.
+    if not result.success and result.status == 1 and np.isfinite(result.x).all():
+        options.update(maxiter=max(options['maxiter'], 20000), maxfun=100000, maxcor=50)
+        result = minimize(objective, result.x, jac=True, method='L-BFGS-B', options=options)
+        restarted = True
     if not result.success or not np.isfinite(result.x).all():
-        raise RuntimeError(f'Pairwise logit optimization failed: {result.message}')
+        raise RuntimeError(f'Pairwise logit optimization failed: {result.message}; '
+                           f'blocks={blocks}, penalties={penalties}, iterations={result.nit}')
     diagnostics = dict(converged=True, optimizer_message=str(result.message),
                        objective=float(result.fun), records=int(len(frame)),
                        parameters=int(x.shape[1]),
                        penalized_parameters=int((penalty > 0).sum()),
                        max_abs_gradient=float(np.abs(result.jac).max()),
-                       blocks=list(blocks))
+                       blocks=list(blocks), restarted_after_budget=restarted,
+                       optimizer_options=options)
     return PairwiseFit(blocks, levels, result.x, penalty, diagnostics)
